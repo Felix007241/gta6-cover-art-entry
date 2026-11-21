@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Vice City Cover Maker — turn your photos and a caption into a multi-panel GTA 6-style cover, offline, exported as PNG.">
 <title>Vice City Cover Maker</title>
 <link rel="stylesheet" href="./style.css">
 </head>
@@ -75,6 +76,7 @@
       <div class="row" role="group" aria-label="Style preset">
         <button type="button" class="preset style-preset" data-style="sunset" aria-pressed="true">Vice City Sunset</button>
         <button type="button" class="preset style-preset" data-style="neon" aria-pressed="false">Neon Night</button>
+        <button type="button" class="preset style-preset" data-style="golden" aria-pressed="false">Golden Hour</button>
       </div>
       <div class="row" role="group" aria-label="Size preset">
         <button type="button" class="preset size-preset" data-size="square" aria-pressed="false">1080 × 1080</button>
@@ -85,6 +87,7 @@
 
     <button id="export" type="button" class="export">Export PNG</button>
     <p id="status" role="status"></p>
+    <p class="hint">Tip: press E to export, R to reset the selected panel's crop. Your photos never leave this machine.</p>
   </section>
   <section class="preview">
     <canvas id="cover" width="1920" height="1080" aria-label="Live cover preview"></canvas>

@@ -14,6 +14,7 @@ input[type=file] { font: inherit; color: #f5eefc; }
 input[type=range] { width: 100%; accent-color: #ff5e7a; }
 button { font: inherit; font-weight: 700; padding: 9px 12px; border: 0; border-radius: 6px; background: #3d2b52; color: #fff; cursor: pointer; }
 button:hover { background: #52406e; }
+button:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid #ffd166; outline-offset: 2px; }
 button[aria-pressed="true"] { background: #ff5e7a; color: #fff; }
 button.export { background: linear-gradient(90deg, #ff5e7a, #ffb347); color: #1c0b2e; font-size: 17px; padding: 12px; }
 button.export:hover { filter: brightness(1.1); }

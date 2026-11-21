@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vice City Cover Maker</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<main class="app">
+  <section class="controls" aria-label="Cover editor">
+    <h1>Vice City Cover Maker</h1>
+    <p class="tagline">Your photos, three panels, one sunset poster. Everything stays on your machine — photos are never uploaded.</p>
+
+    <fieldset class="group">
+      <legend>1 · Photos (up to 3)</legend>
+      <div class="slot" data-slot="0">
+        <label>Photo 1 <input class="photo-input" type="file" accept="image/*"></label>
+        <span class="sample-row">Try a sample:
+          <button type="button" class="sample" data-sample="boulevard">Boulevard</button>
+          <button type="button" class="sample" data-sample="pier">Pier</button>
+        </span>
+        <span class="slot-name" data-slot-name>Empty</span>
+      </div>
+      <div class="slot" data-slot="1">
+        <label>Photo 2 <input class="photo-input" type="file" accept="image/*"></label>
+        <span class="sample-row">Try a sample:
+          <button type="button" class="sample" data-sample="boulevard">Boulevard</button>
+          <button type="button" class="sample" data-sample="pier">Pier</button>
+        </span>
+        <span class="slot-name" data-slot-name>Empty</span>
+      </div>
+      <div class="slot" data-slot="2">
+        <label>Photo 3 <input class="photo-input" type="file" accept="image/*"></label>
+        <span class="sample-row">Try a sample:
+          <button type="button" class="sample" data-sample="boulevard">Boulevard</button>
+          <button type="button" class="sample" data-sample="pier">Pier</button>
+        </span>
+        <span class="slot-name" data-slot-name>Empty</span>
+      </div>
+    </fieldset>
+
+    <fieldset class="group">
+      <legend>2 · Selected panel</legend>
+      <p class="hint">Click a panel in the preview to select it, then drag the photo inside it to pan.</p>
+      <p>Panel: <strong id="panel-name">Hero (top / left)</strong></p>
+      <label>Photo in this panel
+        <select id="panel-photo">
+          <option value="0">Photo 1</option>
+          <option value="1">Photo 2</option>
+          <option value="2">Photo 3</option>
+        </select>
+      </label>
+      <label>Zoom <input id="zoom" type="range" min="1" max="2.5" step="0.05" value="1"></label>
+      <label>Fit
+        <select id="fit">
+          <option value="cover">Cover — fill the panel</option>
+          <option value="fit">Fit — show the whole photo</option>
+        </select>
+      </label>
+      <div class="row">
+        <button id="fill-all" type="button">Fill all panels with this photo</button>
+        <button id="reset-crop" type="button">Reset crop</button>
+      </div>
+    </fieldset>
+
+    <fieldset class="group">
+      <legend>3 · Words</legend>
+      <label>Main caption <input id="caption" type="text" maxlength="30" value="Sunset Heist"></label>
+      <label>Subtitle <input id="subtitle" type="text" maxlength="40" value="Vice City Nights"></label>
+    </fieldset>
+
+    <fieldset class="group">
+      <legend>4 · Style &amp; size</legend>
+      <div class="row" role="group" aria-label="Style preset">
+        <button type="button" class="preset style-preset" data-style="sunset" aria-pressed="true">Vice City Sunset</button>
+        <button type="button" class="preset style-preset" data-style="neon" aria-pressed="false">Neon Night</button>
+      </div>
+      <div class="row" role="group" aria-label="Size preset">
+        <button type="button" class="preset size-preset" data-size="square" aria-pressed="false">1080 × 1080</button>
+        <button type="button" class="preset size-preset" data-size="portrait" aria-pressed="false">1080 × 1350</button>
+        <button type="button" class="preset size-preset" data-size="landscape" aria-pressed="true">1920 × 1080</button>
+      </div>
+    </fieldset>
+
+    <button id="export" type="button" class="export">Export PNG</button>
+    <p id="status" role="status"></p>
+  </section>
+  <section class="preview">
+    <canvas id="cover" width="1920" height="1080" aria-label="Live cover preview"></canvas>
+    <p class="hint">Live preview — click a panel to select it, drag to pan its photo.</p>
+  </section>
+</main>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>

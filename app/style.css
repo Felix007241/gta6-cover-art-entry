@@ -1,0 +1,30 @@
+html, body { margin: 0; min-height: 100%; background: #17101f; color: #f5eefc; font: 15px/1.45 system-ui, sans-serif; }
+.app { display: flex; gap: 28px; align-items: flex-start; justify-content: center; padding: 24px; box-sizing: border-box; }
+.controls { display: flex; flex-direction: column; gap: 14px; width: 320px; flex-shrink: 0; }
+.controls h1 { margin: 0; font-size: 26px; letter-spacing: 0.5px; color: #ffd166; }
+.tagline { margin: 0; color: #c9b8de; }
+.group { border: 1px solid #4a3560; border-radius: 10px; padding: 12px; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.group legend { font-weight: 700; color: #ffb347; padding: 0 6px; }
+.slot { display: flex; flex-direction: column; gap: 5px; padding: 8px; border: 1px dashed #4a3560; border-radius: 8px; }
+.slot-name { color: #9df3ff; font-size: 13px; }
+.sample-row { font-size: 13px; color: #c9b8de; display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+label { display: flex; flex-direction: column; gap: 6px; font-weight: 600; }
+input[type=text], select { font: inherit; padding: 8px; border: 1px solid #6b5583; border-radius: 6px; background: #241832; color: #f5eefc; }
+input[type=file] { font: inherit; color: #f5eefc; }
+input[type=range] { width: 100%; accent-color: #ff5e7a; }
+button { font: inherit; font-weight: 700; padding: 9px 12px; border: 0; border-radius: 6px; background: #3d2b52; color: #fff; cursor: pointer; }
+button:hover { background: #52406e; }
+button[aria-pressed="true"] { background: #ff5e7a; color: #fff; }
+button.export { background: linear-gradient(90deg, #ff5e7a, #ffb347); color: #1c0b2e; font-size: 17px; padding: 12px; }
+button.export:hover { filter: brightness(1.1); }
+.row { display: flex; gap: 8px; flex-wrap: wrap; }
+.row button { flex: 1; }
+.hint { margin: 0; color: #9a86b5; font-size: 13px; }
+#status { margin: 0; color: #9df3ff; min-height: 1.2em; }
+.preview { display: flex; flex-direction: column; gap: 10px; align-items: center; position: sticky; top: 24px; }
+#cover { width: min(62vw, 960px); height: auto; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.55); cursor: grab; background: #0d0518; }
+#cover:active { cursor: grabbing; }
+body.shot-cover .controls, body.shot-cover .preview .hint { display: none; }
+body.shot-cover .app { padding: 0; }
+body.shot-cover .preview { position: static; }
+body.shot-cover #cover { width: 100vw; height: 100vh; object-fit: contain; box-shadow: none; }

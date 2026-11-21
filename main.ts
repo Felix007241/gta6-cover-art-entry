@@ -5,13 +5,14 @@
 // Vice City Cover Maker: a three-panel GTA-style poster maker with per-panel photo crop/position, editable caption
 // and subtitle, Vice City Sunset / Neon Night styles, 1080x1080, 1080x1350 and 1920x1080 sizes, and PNG export.
 // Its two sample photos (app/samples/) were made for make.fun with an image model and are free to use. Put 3 or 4
-// PNG or JPEG screenshots in screenshots/ (the first by name is the cover) and run it.
+// PNG or JPEG screenshots in screenshots/ (the first by name is the cover) and run it. Styles: Vice City Sunset,
+// Neon Night and Golden Hour; sizes 1080x1080, 1080x1350 and 1920x1080.
 //
 // Serve it locally with `node serve.ts`, then open http://localhost:8080.
 // Outside the grader's container, MAKEFUN_OUTPUT_DIR stands in for /output:
 //   mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
 
-import { cpSync, existsSync, mkdirSync, readdirSync, statSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildDossier } from './vendor/makefun-app.ts';
@@ -36,6 +37,11 @@ if (shotCount < 3 || shotCount > 4) {
 for (const shot of readdirSync(join(here, 'screenshots'))) {
   const bytes = statSync(join(here, 'screenshots', shot)).size;
   if (bytes > 262144) throw new Error(`${ENTRY_TITLE}: screenshot ${shot} is ${bytes} bytes, over the 256 KiB cap`);
+}
+// The README is a submission requirement: it must exist and show the
+// competition's live make.fun badges, or the entry is refused at submit time.
+if (!existsSync(join(here, 'README.md')) || !readFileSync(join(here, 'README.md'), 'utf8').includes('make.fun/badge')) {
+  throw new Error(`${ENTRY_TITLE}: README.md is missing or has no make.fun badges`);
 }
 
 mkdirSync(out, { recursive: true });

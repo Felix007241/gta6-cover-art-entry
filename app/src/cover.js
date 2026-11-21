@@ -1,7 +1,7 @@
 // Cover drawing engine for the Vice City Cover Maker.
 //
 // Everything here is drawn in code on a 2D canvas: the multi-panel poster
-// layout, the sunset / neon title band with its sun disc and skyline
+// layout, the sunset / neon / golden-hour title band with its sun disc and skyline
 // silhouettes, the palm trees, and the bold caption lettering. No Rockstar
 // logo, wordmark, official artwork, character or font file is used anywhere:
 // the lettering is a system sans-serif drawn with outline, gradient fill and
@@ -31,6 +31,15 @@ export const STYLES = {
     caption: ['#d8fbff', '#4de8ff', '#ff5ef1'],
     subtitle: '#9df3ff',
     scrim: 'rgba(4, 0, 28, 0.35)',
+  },
+  golden: {
+    label: 'Golden Hour',
+    sky: ['#ffe259', '#ffa751', '#ff7e5f', '#7a2e1d'],
+    sun: '#fff7cc',
+    band: '#3a1c07',
+    caption: ['#fffbe6', '#ffd166', '#ff8c42'],
+    subtitle: '#ffe9b8',
+    scrim: 'rgba(58, 28, 7, 0.3)',
   },
 };
 

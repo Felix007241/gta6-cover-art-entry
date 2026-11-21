@@ -164,7 +164,7 @@ canvas.addEventListener('pointermove', (e) => {
 });
 canvas.addEventListener('pointerup', () => { dragging = null; });
 
-document.getElementById('export').addEventListener('click', () => {
+function exportPng() {
   const size = SIZES[state.size];
   const off = document.createElement('canvas');
   off.width = size.w;
@@ -177,6 +177,21 @@ document.getElementById('export').addEventListener('click', () => {
     a.click();
     status.textContent = `Saved cover-${size.w}x${size.h}.png`;
   }, 'image/png');
+}
+
+document.getElementById('export').addEventListener('click', exportPng);
+
+// Keyboard shortcuts: E exports, R resets the selected panel's crop.
+// Ignored while typing in a text field, so captions stay typeable.
+document.addEventListener('keydown', (e) => {
+  if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA')) return;
+  if (e.key === 'e' || e.key === 'E') exportPng();
+  if (e.key === 'r' || e.key === 'R') {
+    Object.assign(state.panels[state.selectedPanel], { zoom: 1, panX: 0, panY: 0, fit: 'cover' });
+    refreshPanelControls();
+    redraw();
+    status.textContent = 'Crop reset for the selected panel.';
+  }
 });
 
 const shot = new URLSearchParams(location.search).get('shot');
@@ -184,9 +199,15 @@ if (shot) {
   runShot(shot, new URLSearchParams(location.search), async (shotState, urlFor) => {
     const loaded = await Promise.all(shotState.photos.map(async (name, i) => {
       if (!name) return null;
-      const img = await loadImage(urlFor(name));
-      state.photoNames[i] = `Sample: ${name}`;
-      return img;
+      try {
+        const img = await loadImage(urlFor(name));
+        state.photoNames[i] = `Sample: ${name}`;
+        return img;
+      } catch {
+        // Missing sample file: leave this slot empty instead of failing the shot.
+        state.photoNames[i] = 'Empty';
+        return null;
+      }
     }));
     state.photos = loaded;
     state.panels = shotState.panels;

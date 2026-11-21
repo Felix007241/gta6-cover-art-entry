@@ -1,9 +1,11 @@
 // Fixed scenes for screenshots: ?shot=editor shows the editor with sample
 // photos loaded; ?shot=cover shows the finished cover alone, full viewport.
 // Query knobs: photo, photo2, photo3 (samples/<name>.jpg), caption,
-// subtitle, size (square | portrait | landscape), style (sunset | neon),
+// subtitle, size (square | portrait | landscape), style (sunset | neon | golden),
 // panels (e.g. "0,1,0" = which photo each panel shows).
 // window.__shotReady is set once the cover has been painted.
+// A sample name that has no file is skipped (that slot stays empty) instead
+// of failing the whole shot.
 
 /** Builds the cover state for a shot from the page query. */
 export function shotState(query) {
@@ -36,6 +38,11 @@ export function shotState(query) {
 export async function runShot(shot, query, load) {
   if (shot === 'cover') document.body.classList.add('shot-cover');
   const state = shotState(query);
-  await load(state, (name) => `samples/${name}.jpg`);
+  try {
+    await load(state, (name) => `samples/${name}.jpg`);
+  } catch {
+    // A missing sample file must not fail the shot: paint the cover with
+    // whatever photos did load (empty slots fall back to the sunset gradient).
+  }
   requestAnimationFrame(() => requestAnimationFrame(() => { window.__shotReady = true; }));
 }
